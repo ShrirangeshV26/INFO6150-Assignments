@@ -4,6 +4,7 @@ body {
   background: #f5f7fa;
   color: #222;
 }
+
 .site-header {
   background: #034694;
   color: white;
@@ -29,4 +30,19 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+}
+
+section {
+  padding: 2rem;
+  margin: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+aside {
+  margin-top: 1rem;
+  background: #f0f4f8;
+  padding: 1rem;
+  border-radius: 6px;
 }
