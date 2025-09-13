@@ -63,3 +63,25 @@ th {
   background: #034694;
   color: white;
 }
+
+figure {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+audio, video {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 6px;
+}
