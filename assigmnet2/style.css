@@ -58,6 +58,95 @@ header h1 {
     color: var(--accent);
     font-weight: 600;
 }
+.section {
+    padding: 2rem 0;
+}
+
+.flex-row {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-aside {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.profile-pic {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card {
+    background: white;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.btn.small {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+}
+
+.skills-table th,
+.skills-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #eee;
+    text-align: left;
+}
+
+.skills-table thead th {
+    background: linear-gradient(90deg, var(--accent), #009999);
+    color: white;
+}
+
+.skills-table tbody tr:nth-child(odd) {
+    background: #fbfcfc;
+}
+
+
+    
+
 
     
 
