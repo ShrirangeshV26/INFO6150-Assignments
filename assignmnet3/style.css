@@ -100,3 +100,46 @@ tbody tr.selected{
   padding:6px 8px;
 }
 
+.detail-row td{
+  padding:8px 12px;
+  background:#fbfffb;
+  color:#333;
+  font-size:14px;
+}
+.action-btn{
+  padding:6px 8px;
+  border-radius:6px;
+  margin-right:6px;
+  font-size:13px;
+}
+
+.modal-backdrop{
+  position:fixed;
+  left:0;top:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+.modal{
+  background:white;
+  padding:18px;
+  border-radius:10px;
+  width:320px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+}
+.modal h3{ margin:0 0 8px 0; font-size:16px; }
+.modal .row{ margin-bottom:12px; }
+.modal input[type="text"]{
+  width:100%;
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+.modal .modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}

@@ -122,3 +122,52 @@ function findNextId(){
   const max = rows.reduce((m,r)=>Math.max(m,r.id), 0);
   return max+1;
 }
+
+function addNewStudent(){
+  try {
+    const id = findNextId();
+    const newRow = {
+      id: id,
+      name: `Student ${id}`,
+      teacher: `Teacher ${id}`,
+      className: `Class ${id}`
+    };
+    rows.push(newRow);
+    renderTable();
+    alert(`${newRow.name} Record added successfully`);
+  } catch (err){
+    alert('Error: could not add record');
+    console.error(err);
+  }
+}
+
+function onCheckboxChange(e){
+  const id = Number(e.target.dataset.id);
+  const tr = tableBody.querySelector(`tr[data-id="${id}"]`);
+  const editBtn = tr.querySelector('td:nth-last-child(2) > button');
+  const delBtn = tr.querySelector('td:last-child > button');
+
+  if (e.target.checked){
+    tr.classList.add('selected');
+    selectedSet.add(id);
+    editBtn.classList.remove('hidden');
+    delBtn.classList.remove('hidden');
+  } else {
+    tr.classList.remove('selected');
+    selectedSet.delete(id);
+    editBtn.classList.add('hidden');
+    delBtn.classList.add('hidden');
+  }
+  updateSubmitState();
+}
+function updateSubmitState(){
+  if (selectedSet.size > 0){
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('disabled');
+    submitBtn.classList.add('enabled');
+  } else {
+    submitBtn.disabled = true;
+    submitBtn.classList.remove('enabled');
+    submitBtn.classList.add('disabled');
+  }
+}
