@@ -1,0 +1,50 @@
+html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dynamic Student Table</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="me">
+      <div id="fullName">Full Name: </div>
+      <div id="nuid">NUID: </div>
+    </div>
+
+    <div class="controls">
+      <button id="addBtn" class="small">Add New Student</button>
+      <button id="submitBtn" class="small disabled" disabled>Submit</button>
+    </div>
+  </header>
+
+  <section class="table-wrap">
+    <caption style="caption-side:top; text-align:left; font-weight:600; margin-bottom:6px;">
+      Student Records
+    </caption>
+
+    <table aria-label="Student table" id="studentTable">
+      <thead>
+        <tr>
+          <th style="width:48px;">#</th>
+          <th style="width:48px;"></th>
+          <th>Student Name</th>
+          <th>Teacher</th>
+          <th>Class</th>
+          <th>Check</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- rows are inserted dynamically -->
+      </tbody>
+      <tfoot>
+        <tr><td colspan="8" style="padding:8px 10px; text-align:left; font-size:13px; color:#666;">
+          Tip: Click green arrow to expand/collapse a row.
+        </td></tr>
+      </tfoot>
+    </table>
+  </section>
+  
