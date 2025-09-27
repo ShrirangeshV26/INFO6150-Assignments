@@ -81,3 +81,44 @@ function renderTable(){
       tableBody.appendChild(tr);
     }
   }
+  if (rows.length === 0){
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 8;
+    td.style.textAlign = 'center';
+    td.style.padding = '18px';
+    td.textContent = 'No student records';
+    tr.appendChild(td);
+    tableBody.appendChild(tr);
+  }
+  updateSubmitState();
+
+
+function toggleDetail(id, arrowBtn){
+  const tr = tableBody.querySelector(`tr[data-id="${id}"]`);
+  if (!tr) return;
+  const next = tr.nextElementSibling;
+  if (next && next.classList.contains('detail-row')){
+    next.remove();
+    arrowBtn.classList.remove('expanded');
+  } else {
+    const detail = document.createElement('tr');
+    detail.className = 'detail-row';
+    const td = document.createElement('td');
+    td.colSpan = 8;
+    const rowData = rows.find(r=>r.id===id);
+    td.innerHTML = `<strong>Details for ${rowData.name}:</strong> Teacher: ${rowData.teacher}. Class: ${rowData.className}.`;
+    detail.appendChild(td);
+    tr.parentNode.insertBefore(detail, tr.nextSibling);
+    arrowBtn.classList.add('expanded');
+  }
+}
+
+function findNextId(){
+  if (availableIds.length>0){
+    availableIds.sort((a,b)=>a-b);
+    return availableIds.shift();
+  }
+  const max = rows.reduce((m,r)=>Math.max(m,r.id), 0);
+  return max+1;
+}
