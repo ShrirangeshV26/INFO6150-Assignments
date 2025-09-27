@@ -171,3 +171,68 @@ function updateSubmitState(){
     submitBtn.classList.add('disabled');
   }
 }
+function onDeleteClick(id){
+  const row = rows.find(r=>r.id===id);
+  if (!row) return;
+  rows = rows.filter(r=>r.id!==id);
+  if (!availableIds.includes(id)) availableIds.push(id);
+  selectedSet.delete(id);
+  renderTable();
+  alert(`${row.name} Record deleted successfully`);
+}
+
+function onEditClick(id){
+  editingId = id;
+  modalTitle.textContent = `Edit details of Student ${id}`;
+  modalInput.value = '';
+  modalBackdrop.style.display = 'flex';
+  modalInput.focus();
+}
+
+modalOk.addEventListener('click', ()=>{
+  const val = modalInput.value.trim();
+  const id = editingId;
+  modalBackdrop.style.display = 'none';
+  if (val.length > 0){
+    alert(`Student ${id} data updated successfully`);
+  } else {
+    alert('No data entered. Update cancelled.');
+  }
+  editingId = null;
+});
+modalCancel.addEventListener('click', ()=>{
+  modalBackdrop.style.display = 'none';
+  editingId = null;
+});
+modalBackdrop.addEventListener('click', (e)=>{
+  if (e.target === modalBackdrop){
+    modalBackdrop.style.display = 'none';
+    editingId = null;
+  }
+});
+
+function init(){
+  document.getElementById('fullName').textContent = `Full Name: ${USER_FULL_NAME}`;
+  document.getElementById('nuid').textContent = `NUID: ${USER_NUID}`;
+
+  for (let i=1;i<=INITIAL_COUNT;i++){
+    rows.push({
+      id:i,
+      name:`Student ${i}`,
+      teacher:`Teacher ${i}`,
+      className:`Class ${i}`
+    });
+  }
+  renderTable();
+
+  addBtn.addEventListener('click', addNewStudent);
+  submitBtn.addEventListener('click', ()=>{
+    if (selectedSet.size === 0) return;
+    const list = Array.from(selectedSet).sort((a,b)=>a-b).map(id=>{
+      const r = rows.find(rr=>rr.id===id);
+      return r ? r.name : `Student ${id}`;
+    });
+    alert('Submitting selected: ' + list.join(', '));
+  });
+}
+document.addEventListener('DOMContentLoaded', init);
