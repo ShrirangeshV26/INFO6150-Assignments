@@ -47,4 +47,19 @@ html lang="en">
       </tfoot>
     </table>
   </section>
-  
+  div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Edit details</h3>
+      <div class="row">
+        <input id="modalInput" type="text" placeholder="Enter new value..." />
+      </div>
+      <div class="modal-actions">
+        <button id="modalCancel">Cancel</button>
+        <button id="modalOk">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
