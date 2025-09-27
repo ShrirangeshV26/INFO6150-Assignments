@@ -2,237 +2,161 @@ const USER_FULL_NAME = "Shrirangesh Vedanarayanan";
 const USER_NUID = "2110110887";
 const INITIAL_COUNT = 3;
 
-// Table state
-const tableBody = document.getElementById('tableBody');
-const addBtn = document.getElementById('addBtn');
-const submitBtn = document.getElementById('submitBtn');
-const modalBackdrop = document.getElementById('modalBackdrop');
-const modalTitle = document.getElementById('modalTitle');
-const modalInput = document.getElementById('modalInput');
-const modalOk = document.getElementById('modalOk');
-const modalCancel = document.getElementById('modalCancel');
+const fullNameDiv = document.getElementById("fullName");
+const nuidDiv = document.getElementById("nuid");
+const addBtn = document.getElementById("addBtn");
+const submitBtn = document.getElementById("submitBtn");
+const tableBody = document.getElementById("tableBody");
 
-let rows = [];
-let availableIds = [];
-let selectedSet = new Set();
-let editingId = null;
+const modalBackdrop = document.getElementById("modalBackdrop");
+const modalTitle = document.getElementById("modalTitle");
+const modalInput = document.getElementById("modalInput");
+const modalCancel = document.getElementById("modalCancel");
+const modalOk = document.getElementById("modalOk");
 
+let studentCount = 0;
 
-function createArrowButton(){
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'arrow-btn';
-  btn.setAttribute('aria-label', 'expand row');
-  btn.innerHTML = `
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 5l8 7-8 7" stroke="#1fab2a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  `;
-  return btn;
-  }
+window.addEventListener("DOMContentLoaded", () => {
+  fullNameDiv.textContent = "Full Name: " + USER_FULL_NAME;
+  nuidDiv.textContent = "NUID: " + USER_NUID;
 
+  for (let i = 1; i <= INITIAL_COUNT; i++) addStudentRow(i);
+  studentCount = INITIAL_COUNT;
 
-function renderTable(){
-  tableBody.innerHTML = '';
-  rows.sort((a,b)=>a.id-b.id);
-
-  for (const r of rows){
-    const tr = document.createElement('tr');
-    tr.dataset.id = r.id;
-
-    const tdIndex = document.createElement('td');
-    tdIndex.textContent = r.id;
-    tr.appendChild(tdIndex);
-
-    const tdArrow = document.createElement('td');
-    const arrowBtn = createArrowButton();
-    arrowBtn.addEventListener('click', ()=>toggleDetail(r.id, arrowBtn));
-    tdArrow.appendChild(arrowBtn);
-    tr.appendChild(tdArrow);
-
-    const tdName = document.createElement('td'); tdName.textContent = r.name; tr.appendChild(tdName);
-    const tdTeacher = document.createElement('td'); tdTeacher.textContent = r.teacher; tr.appendChild(tdTeacher);
-    const tdClass = document.createElement('td'); tdClass.textContent = r.className; tr.appendChild(tdClass);
-
-    const tdCheck = document.createElement('td');
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.dataset.id = r.id;
-    cb.addEventListener('change', onCheckboxChange);
-    tdCheck.appendChild(cb);
-    tr.appendChild(tdCheck);
-
-    const tdEdit = document.createElement('td');
-    const editBtn = document.createElement('button');
-    editBtn.className = 'action-btn hidden';
-    editBtn.textContent = 'Edit';
-    editBtn.addEventListener('click', ()=>onEditClick(r.id));
-    tdEdit.appendChild(editBtn);
-    tr.appendChild(tdEdit);
-
-    const tdDelete = document.createElement('td');
-    const delBtn = document.createElement('button');
-    delBtn.className = 'action-btn hidden';
-    delBtn.textContent = 'Delete';
-    delBtn.addEventListener('click', ()=>onDeleteClick(r.id));
-    tdDelete.appendChild(delBtn);
-    tr.appendChild(tdDelete);
-
-      tableBody.appendChild(tr);
-    }
-  }
-  if (rows.length === 0){
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.colSpan = 8;
-    td.style.textAlign = 'center';
-    td.style.padding = '18px';
-    td.textContent = 'No student records';
-    tr.appendChild(td);
-    tableBody.appendChild(tr);
-  }
-  updateSubmitState();
-
-
-function toggleDetail(id, arrowBtn){
-  const tr = tableBody.querySelector(`tr[data-id="${id}"]`);
-  if (!tr) return;
-  const next = tr.nextElementSibling;
-  if (next && next.classList.contains('detail-row')){
-    next.remove();
-    arrowBtn.classList.remove('expanded');
-  } else {
-    const detail = document.createElement('tr');
-    detail.className = 'detail-row';
-    const td = document.createElement('td');
-    td.colSpan = 8;
-    const rowData = rows.find(r=>r.id===id);
-    td.innerHTML = `<strong>Details for ${rowData.name}:</strong> Teacher: ${rowData.teacher}. Class: ${rowData.className}.`;
-    detail.appendChild(td);
-    tr.parentNode.insertBefore(detail, tr.nextSibling);
-    arrowBtn.classList.add('expanded');
-  }
-}
-
-function findNextId(){
-  if (availableIds.length>0){
-    availableIds.sort((a,b)=>a-b);
-    return availableIds.shift();
-  }
-  const max = rows.reduce((m,r)=>Math.max(m,r.id), 0);
-  return max+1;
-}
-
-function addNewStudent(){
-  try {
-    const id = findNextId();
-    const newRow = {
-      id: id,
-      name: `Student ${id}`,
-      teacher: `Teacher ${id}`,
-      className: `Class ${id}`
-    };
-    rows.push(newRow);
-    renderTable();
-    alert(`${newRow.name} Record added successfully`);
-  } catch (err){
-    alert('Error: could not add record');
-    console.error(err);
-  }
-}
-
-function onCheckboxChange(e){
-  const id = Number(e.target.dataset.id);
-  const tr = tableBody.querySelector(`tr[data-id="${id}"]`);
-  const editBtn = tr.querySelector('td:nth-last-child(2) > button');
-  const delBtn = tr.querySelector('td:last-child > button');
-
-  if (e.target.checked){
-    tr.classList.add('selected');
-    selectedSet.add(id);
-    editBtn.classList.remove('hidden');
-    delBtn.classList.remove('hidden');
-  } else {
-    tr.classList.remove('selected');
-    selectedSet.delete(id);
-    editBtn.classList.add('hidden');
-    delBtn.classList.add('hidden');
-  }
-  updateSubmitState();
-}
-function updateSubmitState(){
-  if (selectedSet.size > 0){
-    submitBtn.disabled = false;
-    submitBtn.classList.remove('disabled');
-    submitBtn.classList.add('enabled');
-  } else {
-    submitBtn.disabled = true;
-    submitBtn.classList.remove('enabled');
-    submitBtn.classList.add('disabled');
-  }
-}
-function onDeleteClick(id){
-  const row = rows.find(r=>r.id===id);
-  if (!row) return;
-  rows = rows.filter(r=>r.id!==id);
-  if (!availableIds.includes(id)) availableIds.push(id);
-  selectedSet.delete(id);
-  renderTable();
-  alert(`${row.name} Record deleted successfully`);
-}
-
-function onEditClick(id){
-  editingId = id;
-  modalTitle.textContent = `Edit details of Student ${id}`;
-  modalInput.value = '';
-  modalBackdrop.style.display = 'flex';
-  modalInput.focus();
-}
-
-modalOk.addEventListener('click', ()=>{
-  const val = modalInput.value.trim();
-  const id = editingId;
-  modalBackdrop.style.display = 'none';
-  if (val.length > 0){
-    alert(`Student ${id} data updated successfully`);
-  } else {
-    alert('No data entered. Update cancelled.');
-  }
-  editingId = null;
-});
-modalCancel.addEventListener('click', ()=>{
-  modalBackdrop.style.display = 'none';
-  editingId = null;
-});
-modalBackdrop.addEventListener('click', (e)=>{
-  if (e.target === modalBackdrop){
-    modalBackdrop.style.display = 'none';
-    editingId = null;
-  }
+  submitBtn.disabled = true;
+  submitBtn.classList.add("disabled");
 });
 
-function init(){
-  document.getElementById('fullName').textContent = `Full Name: ${USER_FULL_NAME}`;
-  document.getElementById('nuid').textContent = `NUID: ${USER_NUID}`;
+function addStudentRow(num) {
+  const tr = document.createElement("tr");
 
-  for (let i=1;i<=INITIAL_COUNT;i++){
-    rows.push({
-      id:i,
-      name:`Student ${i}`,
-      teacher:`Teacher ${i}`,
-      className:`Class ${i}`
-    });
-  }
-  renderTable();
+  const numTd = document.createElement("td");
+  numTd.textContent = num;
+  tr.appendChild(numTd);
 
-  addBtn.addEventListener('click', addNewStudent);
-  submitBtn.addEventListener('click', ()=>{
-    if (selectedSet.size === 0) return;
-    const list = Array.from(selectedSet).sort((a,b)=>a-b).map(id=>{
-      const r = rows.find(rr=>rr.id===id);
-      return r ? r.name : `Student ${id}`;
-    });
-    alert('Submitting selected: ' + list.join(', '));
+  const expandTd = document.createElement("td");
+  const arrow = document.createElement("span");
+  arrow.textContent = "➤";
+  arrow.style.cursor = "pointer";
+  arrow.addEventListener("click", () => toggleExpandRow(tr));
+  expandTd.appendChild(arrow);
+  tr.appendChild(expandTd);
+
+  const nameTd = document.createElement("td");
+  nameTd.textContent = "Student " + num;
+  tr.appendChild(nameTd);
+
+  const teacherTd = document.createElement("td");
+  teacherTd.textContent = "Teacher " + num;
+  tr.appendChild(teacherTd);
+
+  const classTd = document.createElement("td");
+  classTd.textContent = "Class " + num;
+  tr.appendChild(classTd);
+
+  const checkTd = document.createElement("td");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.addEventListener("change", () =>
+    handleCheckboxChange(checkbox, tr, nameTd.textContent)
+  );
+  checkTd.appendChild(checkbox);
+  tr.appendChild(checkTd);
+
+  tr.appendChild(document.createElement("td"));
+  tr.appendChild(document.createElement("td"));
+
+  tableBody.appendChild(tr);
+}
+
+function renumberStudents() {
+  const rows = tableBody.querySelectorAll("tr");
+  rows.forEach((row, i) => {
+    row.children[0].textContent = i + 1;
+    row.children[2].textContent = "Student " + (i + 1);
+    row.children[3].textContent = "Teacher " + (i + 1);
+    row.children[4].textContent = "Class " + (i + 1);
   });
+  studentCount = rows.length;
 }
-document.addEventListener('DOMContentLoaded', init);
+
+function toggleExpandRow(row) {
+  row.classList.toggle("expanded");
+  if (row.classList.contains("expanded")) {
+    alert(`${row.children[2].textContent} expanded`);
+  } else {
+    alert(`${row.children[2].textContent} collapsed`);
+  }
+}
+
+function handleCheckboxChange(checkbox, row, studentName) {
+  const editTd = row.children[6];
+  const delTd = row.children[7];
+
+  if (checkbox.checked) {
+    row.style.backgroundColor = "yellow";
+    submitBtn.disabled = false;
+    submitBtn.classList.remove("disabled");
+    submitBtn.style.backgroundColor = "orange";
+
+    if (!editTd.firstChild) {
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.addEventListener("click", () => openEditModal(studentName));
+      editTd.appendChild(editBtn);
+    }
+    if (!delTd.firstChild) {
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.addEventListener("click", () => {
+        tableBody.removeChild(row);
+        renumberStudents();
+        alert(`${studentName} Record deleted successfully`);
+        checkIfAnySelected();
+      });
+      delTd.appendChild(delBtn);
+    }
+  } else {
+    row.style.backgroundColor = "white";
+    editTd.innerHTML = "";
+    delTd.innerHTML = "";
+    checkIfAnySelected();
+  }
+}
+
+function checkIfAnySelected() {
+  const anyChecked = tableBody.querySelector("input[type=checkbox]:checked");
+  if (!anyChecked) {
+    submitBtn.disabled = true;
+    submitBtn.classList.add("disabled");
+    submitBtn.style.backgroundColor = "gray";
+  }
+}
+
+function openEditModal(studentName) {
+  if (!modalBackdrop || !modalInput || !modalOk || !modalCancel) return;
+
+  modalTitle.textContent = `Edit details of ${studentName}`;
+  modalInput.value = "";
+  modalBackdrop.style.display = "flex";
+
+  modalOk.onclick = () => {
+    if (modalInput.value.trim()) {
+      alert(`${studentName} data updated successfully`);
+    }
+    modalBackdrop.style.display = "none";
+  };
+
+  modalCancel.onclick = () => {
+    modalBackdrop.style.display = "none";
+  };
+}
+
+addBtn.addEventListener("click", () => {
+  const newNum = studentCount + 1;
+  addStudentRow(newNum);
+  studentCount++;
+  renumberStudents();
+  alert(`Student ${newNum} Record added successfully`);
+});
+

@@ -1,65 +1,65 @@
-html lang="en">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dynamic Student Table</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
-    <div class="me">
-      <div id="fullName">Full Name: </div>
-      <div id="nuid">NUID: </div>
-    </div>
+<header>
+  <div class="me">
+    <div id="fullName">Full Name: </div>
+    <div id="nuid">NUID: </div>
+  </div>
 
-    <div class="controls">
-      <button id="addBtn" class="small">Add New Student</button>
-      <button id="submitBtn" class="small disabled" disabled>Submit</button>
-    </div>
-  </header>
+  <div class="controls">
+    <button id="addBtn" class="small">Add New Student</button>
+    <button id="submitBtn" class="small disabled" disabled>Submit</button>
+  </div>
+</header>
 
-  <section class="table-wrap">
+<section class="table-wrap">
+  <table aria-label="Student table" id="studentTable">
     <caption style="caption-side:top; text-align:left; font-weight:600; margin-bottom:6px;">
       Student Records
     </caption>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th></th>
+        <th>Student Name</th>
+        <th>Teacher</th>
+        <th>Class</th>
+        <th>Check</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+    <tfoot>
+      <tr><td colspan="8" style="padding:8px 10px; text-align:left; font-size:13px; color:#666;">
+        Tip: Click green arrow to expand/collapse a row.
+      </td></tr>
+    </tfoot>
+  </table>
+</section>
 
-    <table aria-label="Student table" id="studentTable">
-      <thead>
-        <tr>
-          <th style="width:48px;">#</th>
-          <th style="width:48px;"></th>
-          <th>Student Name</th>
-          <th>Teacher</th>
-          <th>Class</th>
-          <th>Check</th>
-          <th>EDIT</th>
-          <th>DELETE</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <!-- rows are inserted dynamically -->
-      </tbody>
-      <tfoot>
-        <tr><td colspan="8" style="padding:8px 10px; text-align:left; font-size:13px; color:#666;">
-          Tip: Click green arrow to expand/collapse a row.
-        </td></tr>
-      </tfoot>
-    </table>
-  </section>
-  div id="modalBackdrop" class="modal-backdrop">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h3 id="modalTitle">Edit details</h3>
-      <div class="row">
-        <input id="modalInput" type="text" placeholder="Enter new value..." />
-      </div>
-      <div class="modal-actions">
-        <button id="modalCancel">Cancel</button>
-        <button id="modalOk">OK</button>
-      </div>
+
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Edit details</h3>
+    <div class="row">
+      <input id="modalInput" type="text" placeholder="Enter new value..." />
+    </div>
+    <div class="modal-actions">
+      <button id="modalCancel">Cancel</button>
+      <button id="modalOk">OK</button>
     </div>
   </div>
+</div>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
