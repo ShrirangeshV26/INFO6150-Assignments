@@ -73,3 +73,133 @@ Array.from(fields.title).forEach(r=>{
   r.addEventListener('change', ()=>checkFormValidity());
 });
 
+fields.select.addEventListener('change', ()=>{
+  const container = document.getElementById('dynamicCheckboxContainer');
+  container.innerHTML = '';
+  if(fields.select.value){
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'dynamicCheckbox';
+    const label = document.createElement('label');
+    label.textContent = ` Enable extra input for ${fields.select.value}`;
+    label.style.float='none';
+
+    const textField = document.createElement('input');
+    textField.type = 'text';
+    textField.id = 'dynamicText';
+    textField.placeholder = 'Dynamic field';
+    textField.style.display='none';
+    textField.required = true;
+
+    checkbox.addEventListener('change', ()=>{
+      textField.style.display = checkbox.checked ? 'inline-block' : 'none';
+    });
+
+    container.appendChild(checkbox);
+    container.appendChild(label);
+    container.appendChild(document.createElement('br'));
+    container.appendChild(textField);
+  }
+  checkFormValidity();
+});
+
+
+function checkFormValidity(){
+  let allValid = true;
+
+const titleChecked = Array.from(fields.title).some(r=>r.checked);
+  document.getElementById('titleError').style.display = titleChecked ? 'none' : 'block';
+  allValid = allValid && titleChecked;
+
+  // Others
+  allValid = allValid && validateField(fields.firstName);
+  allValid = allValid && validateField(fields.lastName);
+  allValid = allValid && validateField(fields.email);
+  allValid = allValid && validateField(fields.phone);
+  allValid = allValid && validateField(fields.zip);
+  allValid = allValid && validateField(fields.street1);
+  allValid = allValid && validateField(fields.comments);
+
+ 
+  const selectValid = fields.select.value !== '';
+  document.getElementById('selectError').style.display = selectValid ? 'none' : 'block';
+  allValid = allValid && selectValid;
+
+ 
+  const dynamicCheckbox = document.getElementById('dynamicCheckbox');
+  const dynamicText = document.getElementById('dynamicText');
+  if(dynamicCheckbox && dynamicCheckbox.checked){
+    allValid = allValid && dynamicText.value.trim() !== '';
+  }
+
+  submitBtn.disabled = !allValid;
+  return allValid;
+}
+
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  if(!checkFormValidity()) return;
+
+  const row = document.createElement('tr');
+  const getTitle = ()=> Array.from(fields.title).find(r=>r.checked)?.value || '';
+  const dynamicCheckbox = document.getElementById('dynamicCheckbox');
+  const dynamicText = document.getElementById('dynamicText');
+
+  [getTitle(), fields.firstName.value, fields.lastName.value, fields.email.value,
+   fields.phone.value, fields.zip.value, fields.street1.value, fields.street2.value,
+   fields.select.value, dynamicCheckbox?.checked ? dynamicText.value : '',
+   fields.comments.value]
+  .forEach(val=>{
+    const td = document.createElement('td');
+    td.textContent = val;
+    row.appendChild(td);
+  });
+
+  document.querySelector('#resultTable tbody').appendChild(row);
+  form.reset();
+  document.getElementById('street2Counter').textContent = '0/20 characters used';
+  document.getElementById('dynamicCheckboxContainer').innerHTML = '';
+  submitBtn.disabled = true;
+});
+
+
+const chatbotBtn = document.getElementById('chatbot');
+const chatWindow = document.getElementById('chatWindow');
+const chatMessages = document.getElementById('chatMessages');
+const sendChat = document.getElementById('sendChat');
+
+const faqs = {
+  email: 'You must use your Northeastern email (example: student@northeastern.edu).',
+  phone: 'The phone number must be in the format (XXX) XXX-XXXX.',
+  zip: 'The zip code must be exactly 5 digits.',
+  required: 'All fields are required except Street Address 2.',
+  address: 'Street Address 2 is optional. If left blank, it will remain empty in the results table.'
+};
+
+chatbotBtn.addEventListener('click', ()=>{
+  chatWindow.style.display = chatWindow.style.display === 'block' ? 'none' : 'block';
+});
+
+sendChat.addEventListener('click', ()=>{
+  const q = document.getElementById('chatQuestion').value.trim().toLowerCase();
+  if(!q) return;
+  addChatMessage('You: ' + q);
+  let answered = false;
+  for(const key in faqs){
+    if(q.includes(key)){
+      addChatMessage('Bot: ' + faqs[key]);
+      answered = true;
+      break;
+    }
+  }
+  if(!answered) addChatMessage('Bot: Sorry, I don’t know that yet. Please check the instructions.');
+  document.getElementById('chatQuestion').value = '';
+});
+
+function addChatMessage(text){
+  const div = document.createElement('div');
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
