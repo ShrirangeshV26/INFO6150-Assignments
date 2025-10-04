@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+}
+#container {
+  width: 800px;
+  margin: 20px auto;
+  background-color: beige;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+label {
+  float: left;
+  width: 180px;
+  margin-top: 5px;
+}
+
+input, textarea, select {
+  margin-bottom: 10px;
+}
+.error {
+  color: red;
+  font-size: 0.85em;
+  margin-left: 180px;
+  display: none;
+}
+.char-counter {
+  font-size: 0.8em;
+  margin-left: 180px;
+  color: gray;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table, th, td {
+  border: 1px solid #ccc;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+}
