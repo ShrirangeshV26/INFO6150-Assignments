@@ -16,7 +16,6 @@ label {
   width: 180px;
   margin-top: 5px;
 }
-
 input, textarea, select {
   margin-bottom: 10px;
 }
@@ -43,10 +42,6 @@ th, td {
   padding: 8px;
   text-align: left;
 }
-th {
-  background-color: #f0f0f0;
-}
-
 #chatbot {
   position: absolute;
   top: 20px;

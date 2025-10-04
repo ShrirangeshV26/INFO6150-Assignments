@@ -1,76 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
- <head>
-  <title>Feedback</title>
-  <style>
-    label {	float: left;
-			width: 150px;}
-      #container{
-          width: 700px;
-          margin: auto;
-          background-color: beige;
-      } 
-      main{
-          padding: 50px;
-      }
-  </style>
- </head>
- <body>
- <div id="container">
-	 
-	 <main>
-	 <h2>Feeback</h2>
-	 <h3>Love something? Hate something? Let us know!</h3>
-		 Note : Fields marked with an asterisk(*) are mandatory
-		 <br><br>
-		 <form method="post" novalidate>
-			<label>Title*:</label>
-			<input type="radio" name="title" id="miss" value="miss" required="required"/>Miss
-			<input type="radio" name="title" id="mr" value="mr" required="required"/>Mr.
-			<input type="radio" name="title" id="mrs" value="mrs" required="required"/>Mrs.
-			<br><br>
-			<label for="firstName">First Name*:</label>
-			<input type="text" name="firstName" id="firstName" placeholder="First Name" />	
-			<br><br>
-			
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+  <button id="chatbot">AI Assistant</button>
 
-			<label for="lastName">Last Name*:</label>
-			<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-			<br><br>
-			
+  <div id="chatWindow">
+    <div id="chatMessages"></div>
+    <div id="chatInput">
+      <input type="text" id="chatQuestion" placeholder="Ask a question...">
+      <button id="sendChat">Send</button>
+    </div>
+  </div>
 
-			<label for="emailId">Email Id*:</label>
-			<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" />
-			<br><br>
-			
+  <main>
+    <h2>Feedback Form</h2>
+    <p>Fields marked with * are mandatory</p>
 
-			<label for="phoneNumber">Phone Number*:</label>
-			<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" />
-			<br><br>
-			
-            <label for="zipcode">ZipCode*:</label>
-			<input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" />
-			<br><br>
-             
-            <label for="zipcode">How did you hear*:</label>
-			<input type='checkbox' name="source" value="facebook" /> Facebook
-            <input type='checkbox' name="source" value="google" /> Google
-            <input type='checkbox' name="source" value="yelp" /> Yelp 
-			<br><br> 
-             
-			<label for="comments">Comments*:</label>
-			<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
-			<br><br>
-			<input type="Submit">
-			<input type="Reset">
-			<br><br>
-		 </form>
-	 </main>
- </div>
+    <form id="feedbackForm" novalidate>
+      <label>Title*:</label>
+      <input type="radio" name="title" value="Miss"> Miss
+      <input type="radio" name="title" value="Mr"> Mr.
+      <input type="radio" name="title" value="Mrs"> Mrs.
+      <div class="error" id="titleError">Please select a title.</div>
+      <br>
 
- <script>
- 
- </script>
+      <label for="firstName">First Name*:</label>
+      <input type="text" id="firstName" minlength="2" maxlength="20">
+      <div class="error" id="firstNameError"></div>
+      <br>
 
- </body>
+      <label for="lastName">Last Name*:</label>
+      <input type="text" id="lastName" minlength="2" maxlength="20">
+      <div class="error" id="lastNameError"></div>
+      <br>
+
+      <label for="emailId">Email Id*:</label>
+      <input type="text" id="emailId" placeholder="yourname@northeastern.edu">
+      <div class="error" id="emailIdError"></div>
+      <br>
+
+      <label for="phoneNumber">Phone Number*:</label>
+      <input type="text" id="phoneNumber" placeholder="(XXX) XXX-XXXX" maxlength="14">
+      <div class="error" id="phoneNumberError"></div>
+      <br>
+
+      <label for="zipcode">ZipCode*:</label>
+      <input type="text" id="zipcode" placeholder="12345" maxlength="5">
+      <div class="error" id="zipcodeError"></div>
+      <br>
+
+      <label for="street1">Street Address 1*:</label>
+      <input type="text" id="street1" minlength="5" maxlength="50">
+      <div class="error" id="street1Error"></div>
+      <br>
+
+      <label for="street2">Street Address 2:</label>
+      <input type="text" id="street2" maxlength="20">
+      <div class="char-counter" id="street2Counter">0/20 characters used</div>
+      <br>
+
+      <label for="infoSelect">Select an option*:</label>
+      <select id="infoSelect">
+        <option value="">--Select--</option>
+        <option value="opt1">Option 1</option>
+        <option value="opt2">Option 2</option>
+        <option value="opt3">Option 3</option>
+        <option value="opt4">Option 4</option>
+        <option value="opt5">Option 5</option>
+      </select>
+      <div class="error" id="selectError"></div>
+      <div id="dynamicCheckboxContainer"></div>
+      <br>
+
+      <label for="comments">Comments*:</label>
+      <textarea id="comments" rows="5" cols="25" minlength="5"></textarea>
+      <div class="error" id="commentsError"></div>
+      <br>
+
+      <button type="submit" id="submitBtn" disabled>Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <table id="resultTable">
+      <thead>
+        <tr>
+          <th>Title</th><th>First</th><th>Last</th><th>Email</th><th>Phone</th><th>Zip</th>
+          <th>Street1</th><th>Street2</th><th>Option</th><th>Dynamic</th><th>Comments</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
