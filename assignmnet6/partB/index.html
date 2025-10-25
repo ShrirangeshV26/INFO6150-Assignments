@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Event Stopwatch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="page">
+    <main class="card" style="max-width: 960px">
+      <h1 class="title">Event Stopwatch</h1>
+
+      <section class="timer">
+        <div id="timerDisplay" class="timer__display" aria-live="polite">
+          00:00:00
+        </div>
+        <div id="notif" class="notice" style="display: none"></div>
+      </section>
+
+      <section class="grid grid--two">
+        <div>
+          <h2>Event Details</h2>
+          <div class="field">
+            <label for="eventDate">Date</label>
+            <input id="eventDate" type="date" />
+            <small class="error" id="dateError"></small>
+          </div>
+          <div class="field">
+            <label for="eventName">Event Name</label>
+            <input
+              id="eventName"
+              type="text"
+              placeholder="What are you timing?"
+            />
+            <small class="error" id="nameError"></small>
+          </div>
+
+          <div class="row row--wrap" style="margin-top: 8px">
+            <button id="startBtn" class="btn btn--primary">Start</button>
+            <button id="pauseBtn" class="btn" disabled>Pause</button>
+            <button id="stopBtn" class="btn" disabled>Stop &amp; Save</button>
+            <button id="resetBtn" class="btn btn--ghost" disabled>Reset</button>
+          </div>
+        </div>
+
+        <div>
+          <h2>History</h2>
+          <div class="field">
+            <label for="filterDate">Filter by date</label>
+            <input id="filterDate" type="date" />
+          </div>
+          <div id="history" class="history"></div>
+          <div id="stats" class="stats"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./stopwatch.js"></script>
+  </body>
+</html>
