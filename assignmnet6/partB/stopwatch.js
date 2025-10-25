@@ -52,3 +52,35 @@ $(function(){
       .removeClass("notice--success notice--error")
       .addClass(type==="success"?"notice--success":(type==="error"?"notice--error":""))
       .text(msg).fadeIn(100).delay(1000).fadeOut(250);
+
+  let intervalId = null;
+  let seconds = 0;
+  let paused = false;
+
+  const setRunningUI = (running) => {
+    // disable inputs while running
+    $date.prop("disabled", running);
+    $name.prop("disabled", running);
+    $start.prop("disabled", running);
+    $pause.prop("disabled", !running);
+    $stop.prop("disabled", !running);
+    $reset.prop("disabled", false);
+  };
+
+  
+  const startTimer = () => new Promise((resolve) => {
+    intervalId = setInterval(() => {
+      if (!paused) {
+        seconds += 1;
+        $display.text(formatHMS(seconds));
+      }
+    }, 1000);
+    resolve(true);
+  });
+
+  const stopTimer = async () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  };
