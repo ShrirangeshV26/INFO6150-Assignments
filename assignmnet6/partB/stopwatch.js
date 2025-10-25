@@ -84,3 +84,33 @@ $(function(){
       intervalId = null;
     }
   };
+  const saveSession = (dateStr, nameStr, durationSecs) => {
+    const key = "stopwatch_sessions";
+    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    existing.unshift({
+      date: dateStr,
+      name: nameStr,
+      duration: durationSecs,
+      savedAt: new Date().toISOString()
+    });
+    localStorage.setItem(key, JSON.stringify(existing));
+  };
+
+  const loadSessions = () => JSON.parse(localStorage.getItem("stopwatch_sessions") || "[]");
+
+  const renderHistory = () => {
+    const all = loadSessions();
+    const filter = $filter.val();
+    const list = filter ? all.filter(s => s.date === filter) : all;
+
+    if (!list.length) {
+      $history.html(`<div class="empty">No sessions recorded yet</div>`);
+    } else {
+      $history.html(list.map(s => `
+        <div class="history__item">
+          <div><strong>${s.name}</strong></div>
+          <div class="muted">${s.date}</div>
+          <div class="pill">${formatHMS(s.duration)}</div>
+        </div>
+      `).join(""));
+    }
