@@ -114,3 +114,16 @@ $(function(){
         </div>
       `).join(""));
     }
+const totalCount = list.length;
+    const totalTime  = list.reduce((acc, s) => acc + s.duration, 0);
+    $stats.html(`
+      <div class="stats__row">
+        <div><strong>Total sessions:</strong> ${totalCount}</div>
+        <div><strong>Total time:</strong> ${formatHMS(totalTime)}</div>
+      </div>
+    `);
+  };
+
+  renderHistory();
+
+  $filter.on("change", renderHistory);
