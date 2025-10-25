@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login • Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="page page--auth">
+    <main class="card card--auth">
+      <h1 class="title">Calculator Login</h1>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">Northeastern Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="you@northeastern.edu"
+            autocomplete="username"
+          />
+          <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            minlength="8"
+            autocomplete="current-password"
+          />
+          <small class="error" id="passwordError"></small>
+        </div>
+
+        <div class="row row--between">
+          <label class="checkbox">
+            <input id="rememberMe" type="checkbox" />
+            <span>Remember Me</span>
+          </label>
+          <button id="loginBtn" type="submit" class="btn btn--primary" disabled>
+            Login
+          </button>
+        </div>
+
+        <small
+          class="error"
+          id="credentialsError"
+          style="margin-top: 0.5rem"
+        ></small>
+        <div
+          id="successMsg"
+          class="notice notice--success"
+          style="display: none"
+        >
+          ✓ Login successful — taking you to the calculator…
+        </div>
+      </form>
+    </main>
+    <script src="./login.js"></script>
+  </body>
+</html>
