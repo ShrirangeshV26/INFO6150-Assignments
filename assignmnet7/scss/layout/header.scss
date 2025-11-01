@@ -1,0 +1,31 @@
+@use "../utilities/variables" as v;
+@use "../utilities/mixins" as m;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: map-get(v.$colors, primary);
+  color: #fff;
+  box-shadow: var(--elev-1);
+
+  .inner {
+    @include m.flex-between(1rem); /* FLEXBOX #1 */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+}

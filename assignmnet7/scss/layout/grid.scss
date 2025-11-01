@@ -1,0 +1,14 @@
+@use "../utilities/mixins" as m;
+
+// Grid utilities (requirement: at least two grid layouts will use these)
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+// Generate .grid-cols-2..4 via @for + interpolation
+@for $i from 2 through 4 {
+  .grid-cols-#{$i} {
+    @include m.grid($i, 1rem);
+  }
+}

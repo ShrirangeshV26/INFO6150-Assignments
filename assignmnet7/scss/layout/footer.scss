@@ -1,0 +1,23 @@
+@use "../utilities/mixins" as m;
+@use "../utilities/variables" as v;
+
+.footer {
+  background: #0d2b5a;
+  color: #e8eef8;
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    @include m.flex-between(1.25rem); /* FLEXBOX #2 */
+    flex-wrap: wrap;
+  }
+
+  a {
+    color: #e8eef8;
+    text-decoration: none;
+  }
+  small {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,53 @@
+@use "../utilities/variables" as v;
+@use "../utilities/maps" as m;
+
+// CSS Custom Properties alongside SASS variables
+:root {
+  --radius: #{v.$radius};
+  --font-main: #{v.$font-main};
+
+  // generate CSS variables from SASS maps (@each)
+  @each $name, $val in v.$colors {
+    --color-#{$name}: #{$val};
+  }
+
+  @each $name, $val in v.$spacers {
+    --space-#{$name}: #{$val};
+  }
+
+  --elev-1: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --elev-2: 0 14px 32px rgba(0, 0, 0, 0.12);
+
+  // Alias for quick use
+  --color-bg: var(--color-bg);
+  --color-card: var(--color-card);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  color: map-get(v.$colors, ink);
+  background: map-get(v.$colors, bg);
+  line-height: 1.5;
+  min-height: 100dvh;
+}
+
+/* Utility spacing via interpolation + loops */
+$util-prefix: "u";
+@each $k, $v in v.$spacers {
+  .#{$util-prefix}-mt-#{$k} {
+    margin-top: #{$v};
+  }
+  .#{$util-prefix}-mb-#{$k} {
+    margin-bottom: #{$v};
+  }
+  .#{$util-prefix}-pt-#{$k} {
+    padding-top: #{$v};
+  }
+  .#{$util-prefix}-pb-#{$k} {
+    padding-bottom: #{$v};
+  }
+}
