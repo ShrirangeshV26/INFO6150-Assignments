@@ -1,0 +1,104 @@
+// Central assembly using @use (module system)
+@use "utilities/variables";
+@use "utilities/maps";
+@use "utilities/functions";
+@use "utilities/mixins";
+@use "utilities/placeholders";
+
+@use "layout/reset";
+@use "layout/base";
+@use "layout/grid";
+@use "layout/header";
+@use "layout/footer";
+
+@use "components/nav";
+@use "components/buttons";
+@use "components/cards";
+@use "components/forms";
+
+@use "themes/theme";
+
+/* Page-specific styles (nesting used heavily) */
+
+.hero {
+  min-height: clamp(50vh, 60vh, 72vh);
+  display: grid; /* GRID #1 */
+  place-items: center;
+  text-align: center;
+  padding: var(--space-xl) 1rem;
+  background: linear-gradient(
+      160deg,
+      rgba(3, 70, 148, 0.88),
+      rgba(13, 43, 90, 0.85)
+    ),
+    url("https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=1600&auto=format&fit=crop")
+      center/cover no-repeat;
+  color: #fff;
+
+  .hero__content {
+    max-width: 900px;
+    display: grid;
+    gap: 1rem;
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      letter-spacing: 0.3px;
+    }
+    p {
+      opacity: 0.95;
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+    }
+    .cta {
+      display: inline-flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xl) 1rem;
+}
+
+.features {
+  .grid {
+    /* GRID #2 — feature cards */
+  }
+}
+
+.featured-products {
+  .grid {
+    /* GRID on home page */
+  }
+}
+
+.product-grid {
+  /* Store page main product grid */
+}
+
+.badge {
+  // INTERPOLATION: using brand-name in class is shown in _buttons.scss;
+  // here we add a generic badge
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  background: var(--color-gold);
+  color: #0b132b;
+}
+
+/* Simple animations */
+@keyframes pop {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.card {
+  animation: pop 0.25s ease both;
+}
