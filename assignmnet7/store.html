@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chelsea FC Club Store — Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner">
+        <a class="brand" href="index.html">
+          <img
+            alt="CFC"
+            src="https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg"
+          />
+          <span>Chelsea FC Store</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a aria-current="page" href="store.html">Shop</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="actions">
+          <a class="chelsea-btn--gold" href="#contact">Subscribe</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="section">
+      <header
+        class="u-mb-md"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <h1>Shop Official Merchandise</h1>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+          <select aria-label="Category">
+            <option>All</option>
+            <option>Shirts</option>
+            <option>Scarves</option>
+            <option>Accessories</option>
+          </select>
+          <input placeholder="Search products..." />
+          <button class="chelsea-btn--primary" type="button">Filter</button>
+        </div>
+      </header>
+
+      <section class="product-grid grid grid-cols-3 u-mb-xl">
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1541075215321-5b26343344d6?q=80&w=1200&auto=format&fit=crop"
+              alt="Home Shirt"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">2025/26 Home Shirt</h3>
+            <p class="card__price">$99</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1595878715975-3f5c5b0a1a06?q=80&w=1200&auto=format&fit=crop"
+              alt="Scarf"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Classic Blue Scarf</h3>
+            <p class="card__price">$25</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1621624663440-4e91e9e50ed3?q=80&w=1200&auto=format&fit=crop"
+              alt="Cap"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">CFC Cap</h3>
+            <p class="card__price">$29</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1541075215321-5b26343344d6?q=80&w=1200&auto=format&fit=crop"
+              alt="Away Shirt"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">2025/26 Away Shirt</h3>
+            <p class="card__price">$99</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1520978785342-6a33b6866893?q=80&w=1200&auto=format&fit=crop"
+              alt="Training Jacket"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Training Jacket</h3>
+            <p class="card__price">$79</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img
+              src="https://images.unsplash.com/photo-1621624663440-4e91e9e50ed3?q=80&w=1200&auto=format&fit=crop"
+              alt="Training Shorts"
+            />
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Training Shorts</h3>
+            <p class="card__price">$39</p>
+            <div style="display: flex; gap: 0.5rem">
+              <button class="chelsea-btn--primary">Add to Cart</button>
+              <button class="chelsea-btn--gold">Buy</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="contact" class="u-mt-xl">
+        <h2 class="u-mb-sm">Stay in the Loop</h2>
+        <form class="form" action="#" method="post">
+          <div>
+            <label for="name">Full Name</label>
+            <input id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@northeastern.edu"
+              required
+            />
+            <p class="hint">We’ll send news, drops, and exclusive offers.</p>
+          </div>
+          <button class="chelsea-btn--primary" type="submit">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer u-mt-xl">
+      <div class="inner">
+        <div>
+          <strong>Chelsea FC Store</strong><br />
+          <small>Official fan merchandise</small>
+        </div>
+        <nav aria-label="Footer">
+          <a href="index.html">Home</a> • <a href="store.html">Shop</a> •
+          <a href="#">Privacy</a>
+        </nav>
+        <small>© 2025 Blues Ltd.</small>
+      </div>
+    </footer>
+  </body>
+</html>
