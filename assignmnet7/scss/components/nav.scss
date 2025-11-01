@@ -1,0 +1,22 @@
+@use "../utilities/mixins" as m;
+
+.nav {
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    &:focus-visible {
+      @include m.focus-ring;
+    }
+  }
+}

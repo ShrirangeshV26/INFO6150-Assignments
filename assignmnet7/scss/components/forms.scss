@@ -1,0 +1,32 @@
+@use "../utilities/mixins" as m;
+@use "../utilities/variables" as v;
+
+.form {
+  display: grid;
+  gap: 1rem;
+
+  label {
+    font-weight: 600;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-subtle);
+    border-radius: 0.75rem;
+    background: #fff;
+    &:focus {
+      @include m.focus-ring;
+    }
+  }
+
+  .hint {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  .error {
+    color: map-get(v.$colors, danger);
+    font-weight: 600;
+  }
+}

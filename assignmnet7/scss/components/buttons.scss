@@ -1,0 +1,24 @@
+@use "../utilities/placeholders" as p;
+@use "../utilities/mixins" as m;
+@use "../utilities/variables" as v;
+
+$btn-prefix: "#{v.$brand-name}-btn"; // INTERPOLATION
+
+.#{$btn-prefix} {
+  @extend %btn-base;
+
+  &--primary {
+    @include m.btn-variant(map-get(v.$colors, primary));
+  }
+  &--gold {
+    @include m.btn-variant(map-get(v.$colors, gold), #0b132b);
+  }
+  &--outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use "../utilities/variables" as v;
+
+// Simple theme switch via conditional
+$theme: light; // change to 'dark' to preview
+@if $theme == dark {
+  :root {
+    --color-bg: #0a1224;
+    --color-card: #0f1930;
+  }
+} @else {
+  :root {
+    --color-bg: #f6f8fc;
+    --color-card: #ffffff;
+  }
+}
