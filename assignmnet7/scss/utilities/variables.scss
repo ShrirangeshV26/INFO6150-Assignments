@@ -1,0 +1,42 @@
+// Module entry for core tokens
+// Using @use in partials as v.*
+$brand-name: "chelsea"; // used for interpolation
+
+// Core scales
+$font-main: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";
+$radius: 1rem;
+$spacers: (
+  xs: 0.5rem,
+  sm: 0.75rem,
+  md: 1rem,
+  lg: 1.5rem,
+  xl: 2rem,
+);
+
+// Color tokens (Chelsea-inspired)
+$colors: (
+  primary: #034694,
+  // Chelsea blue
+  gold: #ffcc00,
+  ink: #0b132b,
+  bg: #f6f8fc,
+  card: #ffffff,
+  subtle: #e8eef8,
+  danger: #d93f3f,
+  success: #2a9d8f,
+);
+
+$z: (
+  nav: 1000,
+  overlay: 1100,
+);
+
+// Breakpoints
+$bp: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);

@@ -1,0 +1,8 @@
+// Extra functions
+@function rem($px) {
+  @return calc(#{$px} / 16) * 1rem;
+}
+
+@function clampSize($minPx, $prefVW, $maxPx) {
+  @return clamp(rem($minPx), #{$prefVW}vw, rem($maxPx));
+}

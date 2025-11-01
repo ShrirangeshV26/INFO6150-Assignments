@@ -1,0 +1,17 @@
+@use "variables" as v;
+
+// Expose helpers
+@function color($key) {
+  @return map-get(v.$colors, $key);
+}
+
+@function space($key) {
+  @return map-get(v.$spacers, $key);
+}
+
+@function bp($key) {
+  @return map-get(v.$bp, $key);
+}
+@function radius() {
+  @return v.$radius;
+}

@@ -1,0 +1,55 @@
+@use "variables" as v;
+@use "maps" as m;
+
+// Flex + Grid utilities
+@mixin flex-center($gap: 0) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+@mixin flex-between($gap: 0) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $gap;
+}
+
+@mixin grid($cols, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat(#{$cols}, minmax(0, 1fr));
+  gap: $gap;
+}
+
+// Media query
+@mixin respond($key) {
+  @media (min-width: m.bp($key)) {
+    @content;
+  }
+}
+
+// Focus ring
+@mixin focus-ring {
+  outline: 2px solid map-get(v.$colors, gold);
+  outline-offset: 2px;
+}
+
+// Button variant
+@mixin btn-variant($bg, $fg: #fff) {
+  background: $bg;
+  color: $fg;
+  border: 0;
+  transition: transform 0.12s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  &:focus-visible {
+    @include focus-ring;
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
