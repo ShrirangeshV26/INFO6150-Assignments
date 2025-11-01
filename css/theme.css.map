@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,IAAI,CAAJ,6BAAI;AAUF,AAAA,KAAK,CAAC;EACJ,UAAU,CAAA,QAAC;EACX,YAAY,CAAA,QAAC;CACd",
+    "sources": [
+        "../assignmnet7/scss/themes/theme.scss"
+    ],
+    "names": [],
+    "file": "theme.css"
+}

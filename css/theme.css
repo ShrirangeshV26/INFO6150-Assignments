@@ -1,0 +1,6 @@
+@use "../utilities/variables" as v;
+:root {
+  --color-bg: #f6f8fc;
+  --color-card: #ffffff;
+}
+/*# sourceMappingURL=theme.css.map */
