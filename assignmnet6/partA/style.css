@@ -1,5 +1,5 @@
 :root {
-  --bg: #0b1220;
+  --bg: hwb(35 15% 11%);
   --card: #121a2b;
   --muted: #a7b0c0;
   --text: #f3f5f9;

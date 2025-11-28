@@ -1,7 +1,7 @@
 /* Hardcoded users (email+password). Emails must end with @northeastern.edu */
 const USERS = [
   { email: "student1@northeastern.edu", password: "password123" },
-  { email: "student2@northeastern.edu", password: "hunter2pass" },
+  { email: "student2@northeastern.edu", password: "student2pass" },
   { email: "demo@northeastern.edu", password: "demopass8" },
 ];
 

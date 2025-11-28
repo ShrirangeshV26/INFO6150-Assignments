@@ -13,8 +13,10 @@
   text-align: center;
   padding: 16px 20px;
   border-radius: 16px;
-  background: #0c1426;
+  background: linear-gradient(135deg, #1a2640, #223a66);
   border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: 0 0 15px rgb(79, 141, 255);
 }
 
 .grid--two {
@@ -42,7 +44,7 @@
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: #0c1426;
+  background: #417aff;
 }
 .muted {
   color: var(--muted);
@@ -51,7 +53,7 @@
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: #101a2d;
+  background: #3f83ff;
 }
 .empty {
   color: var(--muted);
