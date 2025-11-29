@@ -14,8 +14,7 @@ const Login = () => {
 
     try {
       await login(email, password);
-      // On success, go to home page
-      navigate("/");
+      navigate("/"); // go to home after login
     } catch (err) {
       console.error(err);
       setError("Login failed. Check your credentials or server.");
@@ -57,7 +56,7 @@ const Login = () => {
           />
         </label>
 
-        {error && <p style={{ color: "red", marginTop: "4px" }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <button
           type="submit"

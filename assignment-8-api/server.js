@@ -1,4 +1,7 @@
 // server.js
+
+const User = require("./models/User");
+
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -11,23 +14,41 @@ const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-// DB
+// ===== DB =====
 connectDB();
 
-// Middlewares
+// ===== Middlewares =====
 app.use(cors());
 app.use(express.json());
 
-// Serve images
+// ===== Static images (uploaded images will be served from /images) =====
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Swagger
+// ===== Swagger =====
 const swaggerPath = path.join(__dirname, "swagger", "swagger.json");
 const swaggerDoc = JSON.parse(fs.readFileSync(swaggerPath, "utf8"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-// Routes
+// ===== Routes =====
 app.use("/user", userRoutes);
+
+// JSON endpoint for companies (used by React CompanyShowcase)
+app.get("/companies", async (req, res) => {
+  try {
+    const users = await User.find({}, "fullName email imagePath");
+
+    const companies = users.map((u) => ({
+      id: u._id,
+      name: u.fullName || u.email,
+      url: u.imagePath || null, // React will show "No Image" if null
+    }));
+
+    res.json(companies);
+  } catch (err) {
+    console.error("Error in /companies:", err);
+    res.status(500).json({ message: "Failed to fetch companies" });
+  }
+});
 
 // Root
 app.get("/", (req, res) => {
@@ -36,6 +57,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Start
-const PORT = process.env.PORT || 6000;
+// ===== Start =====
+const PORT = process.env.PORT || 5001; // 🔴 IMPORTANT: 5001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
